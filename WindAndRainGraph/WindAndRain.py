@@ -42,6 +42,8 @@ def generatingWind(startDate, endDate, location="Oregon Offshore", windSpeedType
     if location == "Oregon Shelf":
         temp = shelf_graphData[(shelf_graphData["dateTime"] >= start_Time) & (shelf_graphData["dateTime"] <= end_Time)]
 
+    temp = temp.sort_values(by=['dateTime'])
+
     # get y value for the graph, default y = magnitude
     y_val = np.sqrt((temp.eastward_wind_velocity)**2 + (temp.northward_wind_velocity)**2)
 
@@ -67,6 +69,8 @@ def generatePrecipitation(startDate, endDate, location="Oregon Offshore"):
 
         if location == "Oregon Shelf":
             temp = shelf_graphData[(shelf_graphData["dateTime"] >= start_Time) & (shelf_graphData["dateTime"] <= end_Time)]
+
+        temp = temp.sort_values(by=['dateTime'])
 
         # reset index
         temp = temp.reset_index(drop=True)
