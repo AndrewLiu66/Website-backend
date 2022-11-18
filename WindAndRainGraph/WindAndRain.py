@@ -9,24 +9,9 @@ import hvplot
 import holoviews as hv
 hv.extension("bokeh")
 
-# assistant function
-def ntp_seconds_to_datetime(ntp_seconds):
-    ntp_epoch = datetime.datetime(1900, 1, 1)
-    unix_epoch = datetime.datetime(1970, 1, 1)
-    ntp_delta = (unix_epoch - ntp_epoch).total_seconds()
-    return datetime.datetime.utcfromtimestamp(ntp_seconds - ntp_delta).replace(microsecond=0)
 
-def convertDateStringToDateObj(data):
-    time = data.time
-    datetime = time.apply(ntp_seconds_to_datetime)
-    data["dateTime"] = datetime
-    return data
-
-offshore_graphData = pd.read_csv("./WindAndRainGraph/offshore_coreData.csv")
-shelf_graphData = pd.read_csv("./WindAndRainGraph/shelf_coreData.csv")
-
-offshore_graphData = convertDateStringToDateObj(offshore_graphData)
-shelf_graphData = convertDateStringToDateObj(shelf_graphData)
+offshore_graphData = pd.read_csv("./WindAndRainGraph/offshore_coreData.csv", parse_dates=["dateTime"])
+shelf_graphData = pd.read_csv("./WindAndRainGraph/shelf_coreData.csv", parse_dates=["dateTime"])
 
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
