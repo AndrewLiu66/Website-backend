@@ -10,8 +10,8 @@ import holoviews as hv
 hv.extension("bokeh")
 
 
-offshore_graphData = pd.read_csv("./WindAndRainGraph/offshore_coreData.csv", parse_dates=["dateTime"])
-shelf_graphData = pd.read_csv("./WindAndRainGraph/shelf_coreData.csv", parse_dates=["dateTime"])
+offshore_graphData = pd.read_csv("./WindAndRainGraph/offshore_coreData2.csv", parse_dates=["dateTime"])
+shelf_graphData = pd.read_csv("./WindAndRainGraph/shelf_graphData2.csv", parse_dates=["dateTime"])
 
 def intersection(lst1, lst2):
     lst3 = [value for value in lst1 if value in lst2]
