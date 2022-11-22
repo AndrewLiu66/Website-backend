@@ -55,8 +55,11 @@ def index():
 @cross_origin()
 def getCTP():
     request_data = request.get_json()
+    startDate = request_data["startDate"]
+    endDate = request_data["endDate"]
+    print("request_data", request_data)
     location = request_data['location']
-    return generateCTP(location)
+    return generateCTP(location, startDate, endDate)
 
 # get CTP graph based on location selected
 @app.route('/api/getCTPLine', methods=['POST'])
