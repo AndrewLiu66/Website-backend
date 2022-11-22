@@ -17,6 +17,7 @@ import holoviews as hv
 import pandas as pd
 import xarray as xr
 import sys
+from gevent.pywsgi import WSGIServer
 
 sys.path.insert(0, './CTPgraph')
 sys.path.insert(0, './utils')
@@ -187,4 +188,6 @@ def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    app.run()
+    # app.run()
+    http_server = WSGIServer(('', 8000), app)
+    http_server.serve_forever()
