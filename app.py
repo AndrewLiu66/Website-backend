@@ -55,6 +55,9 @@ def index():
 @cross_origin()
 def getCTP():
     request_data = request.get_json()
+
+    print("request_data", request_data)
+
     location = request_data['location']
     return generateCTP(location)
 
