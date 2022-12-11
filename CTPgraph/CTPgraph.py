@@ -18,11 +18,20 @@ def generateCTPgraph(startDate, endDate, location):
     fileName = location + "_2015-01-01_2022-01-01"
     data = pd.read_csv("./CTPgraph/" + fileName + ".csv")
     locationName = location.replace("_"," ").title()
+
+    #truncates data to date data.
     time = pd.date_range(startDate, endDate)
+
+    #get indexs of the dates in data
+    dateColumns = data.columns
+    startIndex = dateColumns.get_loc(startDate)
+    endIndex = dateColumns.get_loc(endDate)+1
+
+    dateData = data.iloc[:,startIndex:endIndex]
     depth = np.arange(3000)
     ds = xr.Dataset(
         data_vars=dict(
-            SoundSpeed=(["depth","time"], data)
+            SoundSpeed=(["depth","time"], dateData)
         ),
         coords=dict(
             time=(["time"], time),
@@ -30,13 +39,14 @@ def generateCTPgraph(startDate, endDate, location):
         ),
         attrs=dict(description="Sound Data"),
     )
+
+    #holoviews wrapper
     hv_ds = hv.Dataset(ds)[:,:]
-    print("hv_ds", type(hv_ds))
     soundspeed = hv_ds.to(hv.Image, kdims=["time","depth"])
     soundPlot = soundspeed.opts(
         opts.Image(
             title=locationName + " Speed of Sound with Depth vs Time",
-            width=800, height=450,
+            width=600, height=500,
             tools=['hover'],
 
             ylabel='Depth [m]',
@@ -78,8 +88,8 @@ def generateCTDLineGraph(dateTime, location, y = None):
     return plot
 
 # return CTD left graph
-def generateCTP(location):
-    graph = generateCTPgraph('2015-01-01', '2022-01-01', location)
+def generateCTP(location, startDate, endDate):
+    graph = generateCTPgraph(startDate, endDate, location)
     return json.dumps(json_item(graph))
 
 # return CTD right graph
