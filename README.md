@@ -15,7 +15,7 @@ To run this repository, please follow the steps below in your terminal:
 1. creates and run a virtual environment
 
 ```
-$ pipx install virtualenv
+$ pip install virtualenv
 $ virtualenv -p python3 venv
 $ source ./venv/bin/activate
 ```
@@ -25,11 +25,13 @@ $ source ./venv/bin/activate
 ```
 $ pip install -r requirements.txt
 ```
+
 3. run the website
 
 ```
 $ python3 app.py
 ```
+
 3. checkout the website (this link should appear in the terminal immediately after you run the project)
 
 ```
@@ -37,5 +39,6 @@ $ http://127.0.0.1:5000
 ```
 
 ## Tech Stack
+
 - Backend: Python Flask
 - Frontend: React(the build file produced by https://github.com/AndrewLiu66/Ocean-web)
