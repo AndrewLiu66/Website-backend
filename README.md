@@ -1,6 +1,6 @@
 # Website
 
-current website url: http://52.43.62.252/
+current website url: http://54.202.105.156
 
 ## Description
 
@@ -26,16 +26,16 @@ $ source ./venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-3. run the website
+3. run the project
 
 ```
 $ python3 app.py
 ```
 
-3. checkout the website (this link should appear in the terminal immediately after you run the project)
+3. open a browser and enter the following url
 
 ```
-$ http://127.0.0.1:5000
+$ http://localhost:8000/
 ```
 
 ## Tech Stack
