@@ -57,7 +57,6 @@ def getCTP():
     request_data = request.get_json()
     startDate = request_data["startDate"]
     endDate = request_data["endDate"]
-    print("request_data", request_data)
     location = request_data['location']
     return generateCTP(location, startDate, endDate)
 
@@ -107,6 +106,9 @@ def getWindRainGraph():
     start_Time = request_data['startDate']
     end_Time = request_data['endDate']
     location = request_data['location']
+    # fix the input date
+    start_Time['date'] = start_Time['date'].split(' ')[0]
+    end_Time['date'] = end_Time['date'].split(' ')[0]
 
     if graphType == "WindSpeed":
         windSpeedType = request_data['windSpeedType']
