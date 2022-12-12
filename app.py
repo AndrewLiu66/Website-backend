@@ -55,11 +55,10 @@ def index():
 @cross_origin()
 def getCTP():
     request_data = request.get_json()
-
-    print("request_data", request_data)
-
+    startDate = request_data["startDate"]
+    endDate = request_data["endDate"]
     location = request_data['location']
-    return generateCTP(location)
+    return generateCTP(location, startDate, endDate)
 
 # get CTP graph based on location selected
 @app.route('/api/getCTPLine', methods=['POST'])
@@ -107,6 +106,9 @@ def getWindRainGraph():
     start_Time = request_data['startDate']
     end_Time = request_data['endDate']
     location = request_data['location']
+    # fix the input date
+    start_Time['date'] = start_Time['date'].split(' ')[0]
+    end_Time['date'] = end_Time['date'].split(' ')[0]
 
     if graphType == "WindSpeed":
         windSpeedType = request_data['windSpeedType']
@@ -191,6 +193,6 @@ def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    app.run()
-    # http_server = WSGIServer(('', 8000), app)
-    # http_server.serve_forever()
+    # app.run()
+    http_server = WSGIServer(('', 8000), app)
+    http_server.serve_forever()

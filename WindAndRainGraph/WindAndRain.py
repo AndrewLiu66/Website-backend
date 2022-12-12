@@ -1,11 +1,10 @@
 import numpy as np
 import datetime
 import pandas as pd
-from bokeh.plotting import figure, output_file, show
+from bokeh.plotting import figure
 import json
 from bokeh.embed import json_item
 from flask import jsonify
-import hvplot
 import holoviews as hv
 hv.extension("bokeh")
 
@@ -47,6 +46,8 @@ def generatingWindSpeedGraph(startDate, endDate, location="Oregon Offshore", win
 
 def generatePrecipitation(startDate, endDate, location="Oregon Offshore"):
 # filter data
+        print("startDate123", startDate)
+        print("endDate123", endDate)
         start_Time = datetime.datetime(int(startDate["year"]), int(startDate["month"]), int(startDate["date"]))
         end_Time = datetime.datetime(int(endDate["year"]), int(endDate["month"]), int(endDate["date"]))
 
