@@ -10,9 +10,21 @@ If you want to see the detailed React code for the front-end interface, please g
 
 ## Development
 
-To run this repository, please follow the steps below in your terminal:
+To download and run this repository, please follow the steps below in your terminal:
 
-1. creates and run a virtual environment
+1. download the repository
+
+```
+$ git clone https://github.com/AndrewLiu66/Website-backend.git
+```
+
+2. go to the downloaded repository
+
+```
+$ cd Website-backend
+```
+
+3. creates and run a virtual environment
 
 ```
 $ pip install virtualenv
@@ -20,19 +32,19 @@ $ virtualenv -p python3 venv
 $ source ./venv/bin/activate
 ```
 
-2. download all the dependencies
+4. download all the dependencies
 
 ```
 $ pip install -r requirements.txt
 ```
 
-3. run the project
+5. run the project
 
 ```
 $ python3 app.py
 ```
 
-3. open a browser and enter the following url
+6. open a browser and enter the following url
 
 ```
 $ http://localhost:8000/
