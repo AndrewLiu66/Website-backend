@@ -1,6 +1,6 @@
 from graph import getInitGraph
 from graph import getUpdatedGraph
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, make_response, Response
 from flask_cors import CORS, cross_origin
 from flask.helpers import send_from_directory
 from bokeh.io.export import get_screenshot_as_png
@@ -58,6 +58,11 @@ def getCTP():
     startDate = request_data["startDate"]
     endDate = request_data["endDate"]
     location = request_data['location']
+
+    # fix the input date
+    startDate = startDate.split(' ')[0]
+    endDate = endDate.split(' ')[0]
+
     return generateCTP(location, startDate, endDate)
 
 # get CTP graph based on location selected
@@ -185,6 +190,21 @@ def download():
         else:
             return generateCsvSPDF(slice_data)
 
+@app.route('/api/downloadsss', methods=['GET'])
+@cross_origin()
+def downloadCSVVV():
+    data = {'date': ['2022-01-01', '2022-01-02', '2022-01-03'],
+        'value': [1, 2, 3]}
+    df = pd.DataFrame(data)
+    csv = df.to_csv(index=False)
+    response = make_response(csv)
+    response.headers["Content-Disposition"] = "attachment; filename=data.csv"
+    response.headers["Content-Type"] = "text/csv"
+    # Return the response object
+    return response
+
+
+
 # ***** RENDER *****
 # render front-end build
 @app.route('/')
@@ -193,6 +213,6 @@ def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    # app.run()
-    http_server = WSGIServer(('', 8000), app)
-    http_server.serve_forever()
+    app.run()
+    # http_server = WSGIServer(('', 8000), app)
+    # http_server.serve_forever()
