@@ -4,9 +4,9 @@ from flask import Flask, request, send_file
 from flask_cors import CORS, cross_origin
 from flask.helpers import send_from_directory
 from bokeh.io.export import get_screenshot_as_png
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
+# from selenium import webdriver
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.chrome.options import Options
 from ImageToBlob import serve_pil_image
 from Spectrogram import generateSpectrogramGraph
 from Spectrogram import generateSpectrogramCsvValue
@@ -121,9 +121,9 @@ def getWindRainGraph():
 @app.route('/api/downloadPng', methods=['POST'])
 @cross_origin()
 def downloadPNG():
-    options = Options()
-    options.headless = True
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    # options = Options()
+    # options.headless = True
+    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     ctdRightDate=''
     with app.app_context():
         request_data = request.get_json()
